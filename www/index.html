@@ -54,7 +54,10 @@
 		  	var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
 		  	$("body").css("background-color", hue);
 		    //$(this).hide();
-		  });                       
+		  });    
+		  $("body").on("swipeleft",function(){
+		    alert("You swiped left!");
+		  });                      
 		});
 	</script>
 </body>
