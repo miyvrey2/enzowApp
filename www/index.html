@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Stylesheets -->
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<!-- <link rel="stylesheet" type="text/css" href="style.min.css"/> -->
+
+	<style>
+		*{
+			top: 0px;
+			margin: 0px;
+			padding: 0px;
+		}
+
+		body{
+			position: absolute;
+			min-height: 100%;
+			width: 100%;
+		}
+
+		.ui-page{
+			outline: 0px;
+			border :0px;
+			min-height: 100% !important;
+		}
+
+		.ui-loader{
+			display: none;
+		}
+	</style>
+
+	<!-- Javascripts -->
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+	<h1>Hello World </h1>
+	<p>
+		some tekst to introduce my first app
+	</p>
+	<script>
+		$( document ).ready(function() {
+		  $("body").on("tap",function(){
+		  	var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+		  	$("body").css("background-color", hue);
+		    //$(this).hide();
+		  });                       
+		});
+	</script>
+</body>
+</html>
