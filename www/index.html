@@ -26,6 +26,7 @@
 			width: 100%;
 			font-family: 'Raleway', sans-serif;
 			text-align: center;
+            overflow: hidden;
 		}
 
 		.ui-page{
@@ -37,6 +38,19 @@
 		.ui-loader{
 			display: none;
 		}
+
+        .ball{
+            position: relative;
+            width:200px;
+            height:200px;
+            border-radius:200px;
+            background-color: #c62828;
+        }
+
+        .create{
+            width: 100%;
+            display: block;
+        }
 	</style>
 
 	<!-- Javascripts -->
@@ -46,19 +60,57 @@
 <body>
 	<h1>Hello World </h1>
 	<p>
-		some tekst to introduce my first app
+		Tab as many times the red dot
 	</p>
+    <div class="create"></div>
 	<script>
+       myInterval = setInterval(function(){changeBallPosition()}, 10);
+
+       // Get its direction
+       var operators = Array('-=', '+=');
+       var xMove = Math.random() + 0.5;
+       var yMove = Math.random() + 0.5;
+       var xSpeed = operators[Math.floor(Math.random()*operators.length)] + xMove + 'px';
+       var ySpeed = operators[Math.floor(Math.random()*operators.length)] + yMove + 'px';
+
 		$( document ).ready(function() {
-		  $("body").on("tap",function(){
+
+            createBall();
+
+		  $(".ball").on("tap",function(){
 		  	var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
 		  	$("body").css("background-color", hue);
 		    //$(this).hide();
-		  });    
-		  $("body").on("swipeleft",function(){
-		    alert("You swiped left!");
-		  });                      
+		  });
+//		  $("body").on("swipeleft",function(){
+//		    alert("You swiped left!");
+//		  });
+
 		});
+
+       function createBall() {
+           /* Lets find the center of the page */
+           var yCenter = $( window ).height() / 2;
+           var xCenter = $( window ).width()  / 2;
+
+           //create an object ball in that center
+           $(".create").append("<div class='ball'></div>");
+           $(".ball").css('top',yCenter - 100 + 'px'  );
+           $(".ball").css('left',xCenter - 100 + 'px'  );
+       }
+
+        function changeBallPosition() {
+
+            // Get the class and its position
+            var ball = $(".ball");
+            var position = ball.position();
+            if (position.top > 0 && position.top < $( window ).height() - ball.height() ){
+                ball.css('top',ySpeed  );
+                ball.css('left',xSpeed  );
+            }
+            //alert( position.top + 1 + 'px');
+        }
+
 	</script>
 </body>
 </html>
