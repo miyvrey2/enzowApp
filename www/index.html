@@ -41,8 +41,8 @@
 
         .ball{
             position: relative;
-            width:200px;
-            height:200px;
+            width:100px;
+            height:100px;
             border-radius:200px;
             background-color: #c62828;
         }
@@ -78,6 +78,10 @@
             createBall();
 
 		  $(".ball").on("tap",function(){
+              var yCenter = $( window ).height() / 2;
+              var xCenter = $( window ).width()  / 2;
+              $(".ball").css('top',yCenter - 100 + 'px'  );
+              $(".ball").css('left',xCenter - 100 + 'px'  );
 		  	var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
 		  	$("body").css("background-color", hue);
 		    //$(this).hide();
@@ -104,7 +108,7 @@
             // Get the class and its position
             var ball = $(".ball");
             var position = ball.position();
-            if (position.top > 0 && position.top < $( window ).height() - ball.height() ){
+            if ((position.top > 0 && position.top < $( window ).height() - ball.height() ) || (position.left > 0 && position.left < $( window ).width() - ball.width() )){
                 ball.css('top',ySpeed  );
                 ball.css('left',xSpeed  );
             }
