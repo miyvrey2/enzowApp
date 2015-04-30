@@ -64,56 +64,114 @@
 	</p>
     <div class="create"></div>
 	<script>
-       myInterval = setInterval(function(){changeBallPosition()}, 10);
+        $( document ).ready(function() {
+            var room = {
+                width : $( window ).width(),
+                height : $( window ).height()
+            }
 
-       // Get its direction
-       var operators = Array('-=', '+=');
-       var xMove = Math.random() + 0.5;
-       var yMove = Math.random() + 0.5;
-       var xSpeed = operators[Math.floor(Math.random()*operators.length)] + xMove + 'px';
-       var ySpeed = operators[Math.floor(Math.random()*operators.length)] + yMove + 'px';
+            var object = {
+                centerX : Math.random() * 100,
+                centerY : 100,
+                operators : ['-=', '+='],
+                xMove : Math.random() + 0.5,
+                yMove : Math.random() + 0.5
+            }
 
-		$( document ).ready(function() {
+            object.xSpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.xMove + 'px';
+            object.ySpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.yMove + 'px';
 
-            createBall();
+            function createObject(){
+                $(".create").append("<div class='ball'></div>");
+                var ball = $(".ball");
+                ball.css('top',room.height / 2 - object.centerY + 'px'  );
+                ball.css('left',room.width / 2 - object.centerX + 'px'  );
+            }
 
-		  $(".ball").on("tap",function(){
-              var yCenter = $( window ).height() / 2;
-              var xCenter = $( window ).width()  / 2;
-              $(".ball").css('top',yCenter - 100 + 'px'  );
-              $(".ball").css('left',xCenter - 100 + 'px'  );
-		  	var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-		  	$("body").css("background-color", hue);
-		    //$(this).hide();
-		  });
-//		  $("body").on("swipeleft",function(){
-//		    alert("You swiped left!");
+            function moveObject(){
+                // Get the class and its position
+                var ball = $(".ball");
+                var position = ball.position();
+                if ((position.top > 0 && position.top < room.height - ball.height() ) && (position.left > 0 && position.left < room.width - ball.width() )){
+                    ball.css('top',object.ySpeed  );
+                    ball.css('left',object.xSpeed  );
+                } else {
+                    object.xMove = Math.random() + 0.5;
+                    object.yMove = Math.random() + 0.5;
+                }
+            }
+
+            createObject();
+            myInterval = setInterval(function(){moveObject()}, 10);
+
+            $(".ball").on("tap",function(){
+                var ball = $(".ball");
+                object.xMove += 0.2;
+                object.yMove += 0.2;
+                object.xSpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.xMove + 'px';
+                object.ySpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.yMove + 'px';
+
+                ball.css('top',room.height / 2 - object.centerY + 'px'  );
+                ball.css('left',room.width / 2 - object.centerX + 'px'  );
+            });
+
+        });
+//       myInterval = setInterval(function(){changeBallPosition()}, 10);
+//
+//       // Get its direction
+//       var operators = Array('-=', '+=');
+//       var xMove = Math.random() + 0.5;
+//       var yMove = Math.random() + 0.5;
+//       var xSpeed = operators[Math.floor(Math.random()*operators.length)] + xMove + 'px';
+//       var ySpeed = operators[Math.floor(Math.random()*operators.length)] + yMove + 'px';
+//
+//		$( document ).ready(function() {
+//
+//            //createBall();
+//
+//		  $(".ball").on("tap",function(){
+//              var ball = $(".ball");
+//
+//              /* Lets find the center of the page */
+//              var yCenter = $( window ).height() / 2 - ball.height();
+//              var xCenter = $( window ).width()  / 2 - ball.width() / 2;
+//
+//              $(".ball").css('top',yCenter + 'px'  );
+//              $(".ball").css('left',xCenter + 'px'  );
+//		  	var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+//		  	$("body").css("background-color", hue);
+//		    //$(this).hide();
 //		  });
-
-		});
-
-       function createBall() {
-           /* Lets find the center of the page */
-           var yCenter = $( window ).height() / 2;
-           var xCenter = $( window ).width()  / 2;
-
-           //create an object ball in that center
-           $(".create").append("<div class='ball'></div>");
-           $(".ball").css('top',yCenter - 100 + 'px'  );
-           $(".ball").css('left',xCenter - 100 + 'px'  );
-       }
-
-        function changeBallPosition() {
+////		  $("body").on("swipeleft",function(){
+////		    alert("You swiped left!");
+////		  });
+//
+//		});
+//
+//       function createBall() {
+//           $(".create").append("<div class='ball'></div>");
+//           var ball = $(".ball");
+//
+//           /* Lets find the center of the page */
+//           var yCenter = $( window ).height() / 2 - ball.height();
+//           var xCenter = $( window ).width()  / 2 - ball.width() / 2;
+//
+//           //create an object ball in that center
+//           $(".ball").css('top',yCenter + 'px'  );
+//           $(".ball").css('left',xCenter + 'px'  );
+//       }
+//
+//        function changeBallPosition() {
 
             // Get the class and its position
-            var ball = $(".ball");
-            var position = ball.position();
-            if ((position.top > 0 && position.top < $( window ).height() - ball.height() ) || (position.left > 0 && position.left < $( window ).width() - ball.width() )){
-                ball.css('top',ySpeed  );
-                ball.css('left',xSpeed  );
-            }
+//            var ball = $(".ball");
+//            var position = ball.position();
+//            if ((position.top > 0 && position.top < $( window ).height() - ball.height() ) && (position.left > 0 && position.left < $( window ).width() - ball.width() )){
+//                ball.css('top',ySpeed  );
+//                ball.css('left',xSpeed  );
+//            }
             //alert( position.top + 1 + 'px');
-        }
+//        }
 
 	</script>
 </body>
