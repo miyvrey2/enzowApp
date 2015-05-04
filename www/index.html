@@ -44,12 +44,38 @@
             width:100px;
             height:100px;
             border-radius:200px;
-            background-color: #c62828;
+            background: url('img/Lime.png');
+            background-size: 100% 100%;
+            -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
+            animation: mymove 3s infinite;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
         }
 
         .create{
             width: 100%;
             display: block;
+        }
+
+        /* Chrome, Safari, Opera */
+        @-webkit-keyframes mymove {
+            from {-ms-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);}
+
+            to {-ms-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);}
+        }
+
+        @keyframes mymove {
+            from {-ms-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);}
+
+            to {-ms-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);}
         }
 	</style>
 
