@@ -131,16 +131,18 @@
             function moveObject(Citrus){
                 // Get the class and its position
                 var ball = $("#ball");
-                ball.css({
-                    top: Citrus.ySpeed,
-                    left: Citrus.xSpeed
-                });
+                if ((position.top > 0 && position.top < level1.height - ball.height() ) && (position.left > 0 && position.left < level1.width - ball.width() )){
+                    ball.css({ top: Citrus.ySpeed, left: Citrus.xSpeed });
+                }
             }
 
             function moveObjectByClass(Citrus,id){
                 // Get the class and its position
                 var ball = $("#"+id);
-                ball.css({top: Citrus.ySpeed, left: Citrus.xSpeed });
+                var position = ball.position();
+                if ((position.top > 0 && position.top < level1.height - ball.height() ) && (position.left > 0 && position.left < level1.width - ball.width() )){
+                    ball.css({top: Citrus.ySpeed, left: Citrus.xSpeed });
+                }
             }
 
             $('.ball').on("tap",function(){
