@@ -1,222 +1,152 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<!-- Stylesheets -->
-
-	<style>
-		/* latin */
-		@font-face {
-		  font-family: 'Raleway';
-		  font-style: normal;
-		  font-weight: 400;
-		  src: url('font/0dTEPzkLWceF7z0koJaX1A.woff2') format('woff2'),
-		  	   url('font/Raleway-Regular.ttf') format('truetype');
-		  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-		}
-
-		*{
-			top: 0px;
-			margin: 0px;
-			padding: 0px;
-		}
-
-		body{
-			position: absolute;
-			min-height: 100%;
-			width: 100%;
-			font-family: 'Raleway', sans-serif;
-			text-align: center;
-            overflow: hidden;
-            background-image:url('img/background_x3.png');
-		}
-
-		.ui-page{
-			outline: 0px;
-			border :0px;
-			min-height: 100% !important;
-		}
-
-		.ui-loader{
-			display: none;
-		}
-
-        .ball{
-            position: relative;
-            width:100px;
-            height:100px;
-            border-radius:200px;
-        }
-        .drawed_ball{
-            position: relative;
-            width:100px;
-            height:100px;
-            border-radius:200px;
-            background: url('img/Lime.png');
-            background-size: 100% 100%;
-            -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
-            animation: mymove 3s infinite;
-            -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
-        }
-
-        .create{
-            width: 100%;
-            display: block;
-        }
-
-        /* Chrome, Safari, Opera */
-        @-webkit-keyframes mymove {
-            from {-ms-transform: rotate(0deg);
-                -webkit-transform: rotate(0deg);
-                transform: rotate(0deg);}
-
-            to {-ms-transform: rotate(360deg);
-                -webkit-transform: rotate(360deg);
-                transform: rotate(360deg);}
-        }
-
-        @keyframes mymove {
-            from {-ms-transform: rotate(0deg);
-                -webkit-transform: rotate(0deg);
-                transform: rotate(0deg);}
-
-            to {-ms-transform: rotate(360deg);
-                -webkit-transform: rotate(360deg);
-                transform: rotate(360deg);}
-        }
-	</style>
-
-	<!-- Javascripts -->
-	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-</head>
-<body>
-    <div id="score">Score : 0</div>
-	<h1>Hello World </h1>
-	<p>
-		Tab as many times the red dot
-	</p>
-    <div class="create"></div>
-	<script>
-        $( document ).ready(function() {
-            var room = {
-                width : $( window ).width(),
-                height : $( window ).height(),
-                amount : 1,
-                score : 0
+    <head>
+        <style>
+            /* latin */
+            @font-face {
+                font-family: 'Raleway';
+                font-style: normal;
+                font-weight: 400;
+                src: url('font/0dTEPzkLWceF7z0koJaX1A.woff2') format('woff2'),
+                url('font/Raleway-Regular.ttf') format('truetype');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
             }
 
-            var object = {
-                centerX : Math.random() * 100,
-                centerY : 100,
-                operators : ['-=', '+='],
-                xMove : Math.random() + 0.5,
-                yMove : Math.random() + 0.5
+            *{
+                top: 0px;
+                margin: 0px;
+                padding: 0px;
             }
 
-            function createObject(){
-                object.xSpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.xMove + 'px';
-                object.ySpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.yMove + 'px';
-                $(".create").append("<div class='ball'><div class='drawed_ball'></div></div>");
-                var ball = $(".ball");
-                ball.css('top',room.height / 2 - object.centerY + 'px'  );
-                ball.css('left',room.width / 2 - object.centerX + 'px'  );
+            body{
+                position: absolute;
+                min-height: 100%;
+                width: 100%;
+                font-family: 'Raleway', sans-serif;
+                text-align: center;
+                overflow: hidden;
+                background-image:url('img/background_x3.png');
             }
 
-            function moveObject(){
+            .ui-page{
+                outline: 0px;
+                border :0px;
+                min-height: 100% !important;
+            }
+
+            .ui-loader{
+                display: none;
+            }
+
+            .ball{
+                position: absolute;
+                width:100px;
+                height:100px;
+                border-radius:200px;
+            }
+            .drawed_ball{
+                position: relative;
+                width:100px;
+                height:100px;
+                border-radius:200px;
+                background: url('img/Lime.png');
+                background-size: 100% 100%;
+                -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
+                animation: mymove 3s infinite;
+                -webkit-animation-timing-function: linear;
+                animation-timing-function: linear;
+            }
+
+            .create{
+                width: 100%;
+                display: block;
+            }
+
+            /* Chrome, Safari, Opera */
+            @-webkit-keyframes mymove {
+                from {-ms-transform: rotate(0deg);
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);}
+
+                to {-ms-transform: rotate(360deg);
+                    -webkit-transform: rotate(360deg);
+                    transform: rotate(360deg);}
+            }
+
+            @keyframes mymove {
+                from {-ms-transform: rotate(0deg);
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);}
+
+                to {-ms-transform: rotate(360deg);
+                    -webkit-transform: rotate(360deg);
+                    transform: rotate(360deg);}
+            }
+        </style>
+
+        <!-- Javascripts -->
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+    <body>
+        <div id="score">Score : 0</div>
+        <h1>Hello World </h1>
+        <p>
+            Tab as many times the red dot
+        </p>
+        <div class="create"></div>
+        <script>
+
+            /* Create new Room */
+            function Room(){
+                this.width = $( window ).width();
+                this.height = $( window ).height();
+                this.amount = 1;
+                this.score = 0;
+            }
+
+            level1 = new Room();
+
+            /* Create new ball */
+            function Ball(){
+                this.id = "ball_"+Math.floor(Date.now());
+                this.centerX = Math.random() * 100;
+                this.centerY = 100;
+                this.operators = ['-=', '+='];
+                this.sort = ['Lime.png','Orange.png','Grapefruit.png'];
+                this.xMove = Math.random() + 0.5;
+                this.yMove = Math.random() + 0.5;
+                this.xSpeed = this.operators[Math.floor(Math.random()*this.operators.length)] + this.xMove;
+                this.ySpeed = this.operators[Math.floor(Math.random()*this.operators.length)] + this.yMove;
+                $(".create").append("<div id='"+this.id+"'><div class='drawed_ball' style='background-image:url(img/"+this.sort[Math.floor(Math.random()*this.sort.length)]+");'></div></div>");
+                var ball = $("#"+this.id);
+                $(ball).addClass('ball');
+                ball.css('top',level1.height / 2 - this.centerY);
+                ball.css('left',level1.width / 2 - this.centerX);
+            }
+
+            var Lime = new Ball();
+            moveLime = setInterval(function(){moveObjectByClass(Lime, Lime.id)}, 10);
+
+            function moveObject(Citrus){
                 // Get the class and its position
-                var ball = $(".ball");
-                var position = ball.position();
-                if ((position.top > 0 && position.top < room.height - ball.height() ) && (position.left > 0 && position.left < room.width - ball.width() )){
-                    ball.css('top',object.ySpeed  );
-                    ball.css('left',object.xSpeed  );
-                } else {
-                    object.xMove = Math.random() + 0.5;
-                    object.yMove = Math.random() + 0.5;
-                    room.amount = 1;
-                    room.score = 0;
-                }
+                var ball = $("#ball");
+                ball.css({
+                    top: Citrus.ySpeed,
+                    left: Citrus.xSpeed
+                });
             }
 
-            createObject();
-            myInterval = setInterval(function(){moveObject()}, 10);
+            function moveObjectByClass(Citrus,id){
+                // Get the class and its position
+                var ball = $("#"+id);
+                ball.css({top: Citrus.ySpeed, left: Citrus.xSpeed });
+            }
 
-            $(".ball").on("tap",function(){
-                var ball = $(".ball");
-                object.xMove += 0.2;
-                object.yMove += 0.2;
-                object.xSpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.xMove + 'px';
-                object.ySpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.yMove + 'px';
-                room.score += 10;
-                $("#score").replaceWith("<div id='score'>Score : " + room.score + "</div>");
-                if (room.score > 40 && room.amount < 2){
-                    createObject();
-                    room.amount +=1;
-
-                }
-
-                ball.css('top',room.height / 2 - object.centerY + 'px'  );
-                ball.css('left',room.width / 2 - object.centerX + 'px'  );
+            $('.ball').on("tap",function(){
+                var Orange = new Ball();
+                moveOrange = setInterval(function(){moveObjectByClass(Orange, Orange.id)}, 10);
             });
-
-        });
-//       myInterval = setInterval(function(){changeBallPosition()}, 10);
-//
-//       // Get its direction
-//       var operators = Array('-=', '+=');
-//       var xMove = Math.random() + 0.5;
-//       var yMove = Math.random() + 0.5;
-//       var xSpeed = operators[Math.floor(Math.random()*operators.length)] + xMove + 'px';
-//       var ySpeed = operators[Math.floor(Math.random()*operators.length)] + yMove + 'px';
-//
-//		$( document ).ready(function() {
-//
-//            //createBall();
-//
-//		  $(".ball").on("tap",function(){
-//              var ball = $(".ball");
-//
-//              /* Lets find the center of the page */
-//              var yCenter = $( window ).height() / 2 - ball.height();
-//              var xCenter = $( window ).width()  / 2 - ball.width() / 2;
-//
-//              $(".ball").css('top',yCenter + 'px'  );
-//              $(".ball").css('left',xCenter + 'px'  );
-//		  	var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-//		  	$("body").css("background-color", hue);
-//		    //$(this).hide();
-//		  });
-////		  $("body").on("swipeleft",function(){
-////		    alert("You swiped left!");
-////		  });
-//
-//		});
-//
-//       function createBall() {
-//           $(".create").append("<div class='ball'></div>");
-//           var ball = $(".ball");
-//
-//           /* Lets find the center of the page */
-//           var yCenter = $( window ).height() / 2 - ball.height();
-//           var xCenter = $( window ).width()  / 2 - ball.width() / 2;
-//
-//           //create an object ball in that center
-//           $(".ball").css('top',yCenter + 'px'  );
-//           $(".ball").css('left',xCenter + 'px'  );
-//       }
-//
-//        function changeBallPosition() {
-
-            // Get the class and its position
-//            var ball = $(".ball");
-//            var position = ball.position();
-//            if ((position.top > 0 && position.top < $( window ).height() - ball.height() ) && (position.left > 0 && position.left < $( window ).width() - ball.width() )){
-//                ball.css('top',ySpeed  );
-//                ball.css('left',xSpeed  );
-//            }
-            //alert( position.top + 1 + 'px');
-//        }
-
-	</script>
-</body>
+    </script>
+    </body>
 </html>
