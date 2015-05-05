@@ -27,6 +27,7 @@
 			font-family: 'Raleway', sans-serif;
 			text-align: center;
             overflow: hidden;
+            background-image:url('img/background_x3.png');
 		}
 
 		.ui-page{
@@ -40,6 +41,12 @@
 		}
 
         .ball{
+            position: relative;
+            width:100px;
+            height:100px;
+            border-radius:200px;
+        }
+        .drawed_ball{
             position: relative;
             width:100px;
             height:100px;
@@ -84,6 +91,7 @@
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
+    <div id="score">Score : 0</div>
 	<h1>Hello World </h1>
 	<p>
 		Tab as many times the red dot
@@ -93,7 +101,9 @@
         $( document ).ready(function() {
             var room = {
                 width : $( window ).width(),
-                height : $( window ).height()
+                height : $( window ).height(),
+                amount : 1,
+                score : 0
             }
 
             var object = {
@@ -104,11 +114,10 @@
                 yMove : Math.random() + 0.5
             }
 
-            object.xSpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.xMove + 'px';
-            object.ySpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.yMove + 'px';
-
             function createObject(){
-                $(".create").append("<div class='ball'></div>");
+                object.xSpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.xMove + 'px';
+                object.ySpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.yMove + 'px';
+                $(".create").append("<div class='ball'><div class='drawed_ball'></div></div>");
                 var ball = $(".ball");
                 ball.css('top',room.height / 2 - object.centerY + 'px'  );
                 ball.css('left',room.width / 2 - object.centerX + 'px'  );
@@ -124,6 +133,8 @@
                 } else {
                     object.xMove = Math.random() + 0.5;
                     object.yMove = Math.random() + 0.5;
+                    room.amount = 1;
+                    room.score = 0;
                 }
             }
 
@@ -136,6 +147,13 @@
                 object.yMove += 0.2;
                 object.xSpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.xMove + 'px';
                 object.ySpeed = object.operators[Math.floor(Math.random()*object.operators.length)] + object.yMove + 'px';
+                room.score += 10;
+                $("#score").replaceWith("<div id='score'>Score : " + room.score + "</div>");
+                if (room.score > 40 && room.amount < 2){
+                    createObject();
+                    room.amount +=1;
+
+                }
 
                 ball.css('top',room.height / 2 - object.centerY + 'px'  );
                 ball.css('left',room.width / 2 - object.centerX + 'px'  );
